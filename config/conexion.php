@@ -1,25 +1,26 @@
 <?php
-class Conexion {
-    public static function conectar() {
-        // Datos exactos de InfinityFree
-        $host = "sql303.infinityfree.com";
-        $puerto = 3306;
-        $bd = "if0_42359981_db_sabore";
-        $usuario = "if0_42359981";
-        $clave = "Antonella1104R"; // Pon aquí tu contraseña real
+//*Conexion centralizada a la base de datos*//
+//Todos los modelos utilizaran este archivo para acceder a MySQL.//
 
-        // Conectamos forzando el modo correcto
+class Conexion
+{
+    public static function conectar()
+    {
+        $host = "hayabusa.proxy.rlwy.net";
+        $puerto = 40580;
+        $bd = "railway";
+        $usuario = "root";
+        $clave = "rXpqcGApkBfbpwtJrqUqHuMyotEzDAcO";
+
         $conn = new mysqli($host, $usuario, $clave, $bd, $puerto);
 
         if ($conn->connect_error) {
-            die("❌ Error: " . $conn->connect_error);
+            die("Error de conexion: " . $conn->connect_error);
         }
 
-        $conn->set_charset("utf8mb4");
         return $conn;
     }
 }
-?>
 
 /*class Conexion
 {
