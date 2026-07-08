@@ -1,25 +1,25 @@
 <?php
-//*Conexion centralizada a la base de datos*//
-//Todos los modelos utilizaran este archivo para acceder a MySQL.//
+/*Conexion centralizada a la base de datos*/
+//Todos los modelos utilizaran este archivo para acceder a MySQL.
 
 class Conexion {
     public static function conectar() {
-        // Leemos los datos de Render automáticamente
-        $servidor = getenv('DB_HOST') ?: 'localhost';
-        $puerto   = getenv('DB_PORT') ?: '3306';
-        $usuario  = getenv('DB_USER') ?: 'root';
-        $clave    = getenv('DB_PASS') ?: '';
-        $base     = getenv('DB_NAME') ?: 'db_sabore_restaurante';
+        // Leemos datos de Render
+        $host = getenv('DB_HOST');
+        $puerto = getenv('DB_PORT') ?: '3306';
+        $bd = getenv('DB_NAME');
+        $usuario = getenv('DB_USER');
+        $clave = getenv('DB_PASS');
 
-        // Conectamos con los datos correctos
-        $conexion = new mysqli($servidor, $usuario, $clave, $base, $puerto);
+        // Conexión MySQL (lo que ya usas)
+        $conn = new mysqli($host, $usuario, $clave, $bd, $puerto);
 
-        if ($conexion->connect_error) {
-            die("Error de conexión: " . $conexion->connect_error);
+        if ($conn->connect_error) {
+            die("❌ Error de conexión: " . $conn->connect_error);
         }
 
-        $conexion->set_charset("utf8mb4");
-        return $conexion;
+        $conn->set_charset("utf8mb4");
+        return $conn;
     }
 }
 ?>
