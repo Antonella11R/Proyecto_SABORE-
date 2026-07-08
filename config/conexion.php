@@ -1,21 +1,18 @@
 <?php
-/*Conexion centralizada a la base de datos*/
-//Todos los modelos utilizaran este archivo para acceder a MySQL.
-
 class Conexion {
     public static function conectar() {
-        // Leemos datos de Render
-        $host = getenv('DB_HOST');
-        $puerto = getenv('DB_PORT') ?: '3306';
-        $bd = getenv('DB_NAME');
-        $usuario = getenv('DB_USER');
-        $clave = getenv('DB_PASS');
+        // Datos de InfinityFree, pero forzamos la conexión correcta
+        $host = "sql303.infinityfree.com";
+        $puerto = 3306;
+        $bd = "if0_42359981_db_sabore";
+        $usuario = "if0_42359981";
+        $clave = "Antonella1104R";
 
-        // Conexión MySQL (lo que ya usas)
-        $conn = new mysqli($host, $usuario, $clave, $bd, $puerto);
+        // Agregamos configuración para evitar el error de "no encuentra el host"
+        $conn = @new mysqli($host, $usuario, $clave, $bd, $puerto);
 
         if ($conn->connect_error) {
-            die("❌ Error de conexión: " . $conn->connect_error);
+            die("Error: " . $conn->connect_error);
         }
 
         $conn->set_charset("utf8mb4");
